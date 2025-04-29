@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kalkulator Pink Gemes</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #ffeef4;
+      margin: 0;
+    }
+
+    .calculator {
+      background-color: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(255, 182, 193, 0.4);
+      width: 280px;
+    }
+
+    .display {
+      width: 100%;
+      height: 45px;
+      font-size: 22px;
+      text-align: right;
+      padding: 10px;
+      border: 2px solid #ffc0cb;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      background-color: #fff5f9;
+      color: #333;
+    }
+
+    .button-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .button {
+      height: 50px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      background-color: #ffb6c1;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .button:hover {
+      background-color: #ff69b4;
+    }
+
+    .button:active {
+      transform: scale(0.95);
+    }
+
+    .button[data-value="C"] {
+      background-color: #ffa3b1;
+    }
+
+    .button[data-value="="] {
+      background-color: #ff69b4;
+    }
+
+    .footer-note {
+      margin-top: 15px;
+      font-size: 12px;
+      text-align: center;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <input type="text" class="display" id="display" disabled />
+  <div class="button-container">
+    <button class="button" data-value="C">C</button>
+    <button class="button" data-value="/">÷</button>
+    <button class="button" data-value="*">×</button>
+    <button class="button" data-value="-">−</button>
+
+    <button class="button" data-value="7">7</button>
+    <button class="button" data-value="8">8</button>
+    <button class="button" data-value="9">9</button>
+    <button class="button" data-value="+">+</button>
+
+    <button class="button" data-value="4">4</button>
+    <button class="button" data-value="5">5</button>
+    <button class="button" data-value="6">6</button>
+    <button class="button" data-value=".">.</button>
+
+    <button class="button" data-value="1">1</button>
+    <button class="button" data-value="2">2</button>
+    <button class="button" data-value="3">3</button>
+    <button class="button" data-value="=">=</button>
+
+    <button class="button" data-value="0" style="grid-column: span 4">0</button>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    let display = $("#display");
+    let currentInput = "";
+
+    $(".button").click(function () {
+      let value = $(this).data("value");
+
+      if (value === "C") {
+        currentInput = "";
+        display.val("");
+      } else if (value === "=") {
+        try {
+          currentInput = eval(currentInput).toString();
+          display.val(currentInput);
+        } catch (e) {
+          display.val("Error");
+          currentInput = "";
+        }
+      } else {
+        currentInput += value;
+        display.val(currentInput);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
